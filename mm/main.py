@@ -6,7 +6,7 @@ import threading
 
 base_path = 'F://reptile_download/'
 
-base_url = 'http://mm.ked9.com/siwameitui/201506/321.html'
+base_url = 'http://mm.ked9.com/siwameitui/201506/320.html'
 
 html = Download.download_html(base_url)
 html = Htmls(html, 'html.parser')
@@ -41,3 +41,6 @@ for page in pages:
     threads.append(thread)
     thread.setDaemon(True)
     thread.start()
+
+for thread in threads:
+    thread.join(60000)
