@@ -22,3 +22,5 @@ class Download:
         html = conn.read()
 
         return html
+
+
