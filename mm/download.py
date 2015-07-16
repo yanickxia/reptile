@@ -10,7 +10,7 @@ class Download:
         Paths.create_paths(download_location)
         file = open(download_location, 'wb')
 
-        conn = urllib.request.urlopen(url)
+        conn = Download.loop_connection(url)
         file.write(conn.read())
         file.close()
 
@@ -18,9 +18,17 @@ class Download:
 
     @staticmethod
     def download_html(url):
-        conn = urllib.request.urlopen(url)
-        html = conn.read()
 
-        return html
+        conn = Download.loop_connection(url)
 
+        return conn.read()
 
+    @staticmethod
+    def loop_connection(url):
+        while True:
+            try:
+                conn = urllib.request.urlopen(url)
+                break
+            except:
+                print("Try Connection url: ", url)
+        return conn

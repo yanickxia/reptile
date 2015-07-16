@@ -26,3 +26,22 @@ class Htmls(BeautifulSoup):
             if page != None and page != '#':
                 pages.append(page)
         return pages
+
+    def get_list(self):
+        lists = self.find(name='select', attrs={'name': 'sldd'})
+        lists = lists.find_all('option')
+
+        list_pages = []
+        for option in lists:
+            list_pages.append(option.get('value'))
+
+        return list_pages
+
+    def get_items(self):
+        items_divs = self.find_all(name='div', attrs={'class': 'p'})
+        items = []
+
+        for items_div in items_divs:
+            items.append(items_div.find('a').get('href'))
+
+        return items
