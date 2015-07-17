@@ -8,6 +8,10 @@ class Download:
     @staticmethod
     def download(url, download_location):
         Paths.create_paths(download_location)
+
+        if Paths.is_exist(download_location):
+            return
+
         file = open(download_location, 'wb')
 
         conn = Download.loop_connection(url)
@@ -27,7 +31,7 @@ class Download:
     def loop_connection(url):
         while True:
             try:
-                conn = urllib.request.urlopen(url)
+                conn = urllib.request.urlopen(url, timeout=1000)
                 break
             except:
                 print("Try Connection url: ", url)

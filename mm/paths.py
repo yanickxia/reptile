@@ -12,3 +12,7 @@ class Paths:
         if not p.exists():
             p.mkdir()
             print("create path:", paths[0] + '/')
+
+    @staticmethod
+    def is_exist(location):
+        return os.path.exists(location)
